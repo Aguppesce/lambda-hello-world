@@ -1,10 +1,23 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      python: 3.13
+    commands:
+      - echo "Fase de instalación..."
   build:
     commands:
-      - echo "Zipping lambda function..."
+      - echo "Fase de construcción iniciada en `date`"
+      - echo "Empaquetando el código Lambda..."
+      # Asegúrate de que el archivo existe antes de intentar zipearlo
+      - ls -la
+      # Intenta zipear especificando el archivo directamente
       - zip lambda_function.zip lambda_function.py
+      # Como alternativa, podrías intentar: zip -r lambda_function.zip . (zipear todo el directorio actual)
+  post_build:
+    commands:
+      - echo "Fase de construcción completada en `date`"
 
 artifacts:
   files:
