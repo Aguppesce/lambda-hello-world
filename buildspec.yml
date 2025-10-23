@@ -9,13 +9,11 @@ phases:
   build:
     commands:
       - echo "Fase de construcción iniciada en `date`"
-      # CODEBUILD_SRC_DIR es la variable de entorno que apunta al código fuente
       - echo "Directorio fuente: $CODEBUILD_SRC_DIR"
       - cd $CODEBUILD_SRC_DIR
       - echo "Contenido del directorio fuente:"
       - ls -la
       - echo "Empaquetando el código Lambda..."
-      # Zipeamos el archivo desde dentro del directorio fuente
       - zip lambda_function.zip lambda_function.py
   post_build:
     commands:
@@ -23,5 +21,4 @@ phases:
 
 artifacts:
   files:
-    # Importante: Ahora especificamos la ruta RELATIVA al directorio fuente
     - lambda_function.zip
