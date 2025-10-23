@@ -9,16 +9,13 @@ phases:
   build:
     commands:
       - echo "Fase de construcción iniciada en `date`"
-      - echo "Empaquetando el código Lambda..."
-      # Asegúrate de que el archivo existe antes de intentar zipearlo
+      - echo "Contenido del directorio actual antes de zip:"
       - ls -la
-      # Intenta zipear especificando el archivo directamente
-      - zip lambda_function.zip lambda_function.py
-      # Como alternativa, podrías intentar: zip -r lambda_function.zip . (zipear todo el directorio actual)
+      - echo "Empaquetando el código Lambda sin rutas..."
+      # Usamos -j para junk paths (ignorar directorios)
+      - zip -j lambda_function.zip lambda_function.py
   post_build:
     commands:
       - echo "Fase de construcción completada en `date`"
 
-artifacts:
-  files:
-    - lambda_function.zip
+# SIN sección artifacts
