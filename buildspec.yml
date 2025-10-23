@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.13
+    commands:
+      - echo "Fase de instalación..."
+  build:
+    commands:
+      - echo "Fase de construcción iniciada en `date`"
+      - echo "Empaquetando el código Lambda..."
+      - zip lambda_function.zip lambda_function.py
+  post_build:
+    commands:
+      - echo "Fase de construcción completada en `date`"
+
+artifacts:
+  files:
+    - lambda_function.zip
