@@ -2,20 +2,16 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      python: 3.13
     commands:
-      - echo "Fase de instalación..."
+      # Opcional: solo para debugging
+      - ls -l 
+      
   build:
     commands:
-      - echo "Fase de construcción iniciada en `date`"
-      - echo "Contenido del directorio actual antes de zip:"
-      - ls -la
-      - echo "Empaquetando el código Lambda sin rutas..."
-      # Usamos -j para junk paths (ignorar directorios)
-      - zip -j lambda_function.zip lambda_function.py
-  post_build:
-    commands:
-      - echo "Fase de construcción completada en `date`"
+      - echo "Preparando archivos para el artefacto..."
 
-# SIN sección artifacts
+artifacts:
+  #El artefacto de salida de CodeBuild se llamará "lambda_function.py"
+  files:
+    - lambda_function.py  # Especificamos solo el archivo de código
+  discard-paths: no
